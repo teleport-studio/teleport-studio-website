@@ -134,7 +134,7 @@ watch(
           type="button"
           class="relative inline-flex items-center justify-center px-4 py-2 w-full text-white transition-all duration-200 bg-[#8A2BE2] rounded-[10px] focus:outline-none"
         >
-          <span class="text-xl">Let's work</span>
+          <span class="text-xl">Let's workk</span>
         </button>
       </div>
     </div>
