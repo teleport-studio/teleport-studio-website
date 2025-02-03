@@ -1,5 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  console.log('about')
+})
+</script>
 
 <template>
-  <div></div>
+  <div class="h-dvh">dsfsdf</div>
 </template>
