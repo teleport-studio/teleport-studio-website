@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Observer from 'gsap/Observer'
@@ -20,7 +20,8 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0)
 const heroBg = ref()
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
   gsap.fromTo(
     '.char',
     { y: '100%' },
