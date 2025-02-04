@@ -83,7 +83,7 @@ onMounted(async () => {
   <section class="section hero-section h-screen">
     <div
       ref="heroBg"
-      class="absolute hero-bg z-[-1] h-[150dvh] w-full max-w-[1000px] min-w-[500px] top-[40vh] left-[50%] translate-x-[-50%] border-[6rem] border-b-0 md:border-[9rem] md:border-b-0 rounded-tl-[100%] rounded-tr-[100%] rounded-bl-[100%] rounded-br-[100%] border-[#000] blur-xl md:blur-2xl"
+      class="hero-bg w-full max-w-[1000px] min-w-[500px] top-[40vh] border-[6rem] border-b-0 md:border-[9rem] md:border-b-0 rounded-tl-[100%] rounded-tr-[100%] rounded-bl-[100%] rounded-br-[100%] border-[#000] blur-xl md:blur-2xl"
     ></div>
     <div class="flex flex-col h-full items-center justify-start text-black w-full hero-text">
       <h1
@@ -129,7 +129,13 @@ onMounted(async () => {
 
 <style scoped>
 .hero-bg {
-  will-change: opacity;
+  will-change: opacity, transform, translateX;
+  position: absolute;
+  z-index: -1;
+  height: 150dvh;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
   background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1), rgba(138, 43, 226, 1));
 }
 .hero-text {

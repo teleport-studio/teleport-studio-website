@@ -46,7 +46,7 @@ watch(
 <template>
   <header
     ref="header"
-    class="fixed z-50 top-4 left-4 right-4 h-16 flex flex-col justify-start lg:justify-center bg-white/30 backdrop-blur-[10px] rounded-[10px] shadow-[0_18px_40px_rgba(0,0,0,0.03),0_0_2px_rgba(0,0,0,0.14)] bg-blur max-w-[2000px] transition-all duration-500 overflow-hidden"
+    class="fixed z-50 top-4 left-4 right-4 h-16 flex flex-col justify-start lg:justify-center bg-white/30 backdrop-blur-[10px] rounded-[10px] shadow-[0_18px_40px_rgba(0,0,0,0.03),0_0_2px_rgba(0,0,0,0.14)] bg-blur max-w-[2000px] translate-y-[-150px] transition-all duration-500 overflow-hidden"
     :class="{ 'h-[328.5px]': menu }"
     v-on-click-outside="() => (menu = false)"
   >
