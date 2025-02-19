@@ -6,7 +6,9 @@ import Lenis from 'lenis'
 const isReady = ref(false)
 
 onMounted(() => {
-  const lenis = new Lenis()
+  const lenis = new Lenis({
+    smoothWheel: true,
+  })
   function raf(time: number) {
     lenis.raf(time)
     requestAnimationFrame(raf)
