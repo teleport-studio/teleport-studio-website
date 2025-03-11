@@ -6,8 +6,19 @@ import { gsap } from 'gsap'
 const router = useRouter()
 const header = ref()
 
+const navigate = () => {
+  if (router.currentRoute.value.path === '/') {
+    router.push('/contact')
+  } else {
+    router.push('/')
+  }
+}
+
 onMounted(async () => {
   await router.isReady()
+  if (router.currentRoute.value.path === '/contact') {
+    gsap.fromTo(header.value, { y: -150 }, { y: 0, duration: 0.5, ease: 'power2.out' })
+  }
   if (router.currentRoute.value.path === '/') {
     gsap.fromTo(header.value, { y: -150 }, { y: 0, duration: 0.5, delay: 0.5, ease: 'power2.out' })
   }
@@ -37,13 +48,15 @@ watch(
       <div class="h-[1px] bg-black w-full"></div>
       <div class="flex justify-end w-[156px]">
         <button
-          @click="router.push('/contact')"
+          @click="navigate()"
           class="contact group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border border-black bg-transparent font-medium cursor-pointer"
         >
           <div
             class="inline-flex w-full h-12 translate-y-0 items-center justify-center gap-2 px-6 text-black transition duration-500 group-hover:-translate-y-[150%]"
           >
-            <span class="whitespace-nowrap">Let's work</span>
+            <span class="whitespace-nowrap">{{
+              router.currentRoute.value.path === '/' ? "Let's work" : 'Home'
+            }}</span>
             <svg
               width="15"
               height="15"
@@ -67,7 +80,7 @@ watch(
               class="absolute h-full w-full translate-y-full skew-y-12 scale-y-0 bg-black transition duration-500 group-hover:translate-y-0 group-hover:scale-150"
             ></span>
             <span class="z-10 flex items-center gap-2 text-nowrap">
-              Let's work
+              {{ router.currentRoute.value.path === '/' ? "Let's work" : 'Home' }}
               <svg
                 width="15"
                 height="15"

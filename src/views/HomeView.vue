@@ -247,7 +247,7 @@ onMounted(() => {
 
   ScrollTrigger.create({
     trigger: '.section-5',
-    start: 'top 50%',
+    start: 'top top',
     onEnter: () => {
       if (footer instanceof HTMLElement) {
         footer.style.display = 'flex'
