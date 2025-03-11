@@ -6,10 +6,13 @@ import Observer from 'gsap/Observer'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import Lenis from 'lenis'
 import SplitType, { type TargetElement } from 'split-type'
+import { useRouter } from 'vue-router'
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(Observer)
 gsap.registerPlugin(ScrollToPlugin)
+
+const router = useRouter()
 
 const lenis = new Lenis({
   smoothWheel: true,
@@ -238,6 +241,24 @@ onMounted(() => {
       stagger: 0.1,
     })
   })
+
+  //footer
+  const footer = document.querySelector('footer')
+
+  ScrollTrigger.create({
+    trigger: '.section-5',
+    start: 'top 50%',
+    onEnter: () => {
+      if (footer instanceof HTMLElement) {
+        footer.style.display = 'flex'
+      }
+    },
+    onLeaveBack: () => {
+      if (footer instanceof HTMLElement) {
+        footer.style.display = 'none'
+      }
+    },
+  })
 })
 
 onBeforeUnmount(() => {
@@ -290,18 +311,6 @@ onBeforeUnmount(() => {
     <div
       class="flex items-start justify-center max-w-[2000px] px-6 lg:px-12 xl:px-44 mx-auto section-2-text"
     >
-      <!-- <div class="flex text-center flex-col gap-6">
-        <div class="">
-          <h2 class="text-sm lg:text-[16px] uppercase mt-2">From the macro to the micro</h2>
-        </div>
-        <div class="flex flex-col gap-8 lg:col-span-8 text-left text-pretty">
-          <span class="scroll-highlight text-2xl lg:text-[30px] leading-[1.25] text-center">
-            At Teleport Studio, we believe every project is a unique story waiting to be told. We
-            focus on transforming your vision into a digital experience that feels both authentic
-            and thoughtfully crafted.
-          </span>
-        </div>
-      </div> -->
       <div class="flex flex-col gap-6 lg:grid lg:gap-1.5 lg:grid-cols-12">
         <div class="lg:col-span-4">
           <h2 class="text-sm lg:text-[16px] uppercase mt-2">From the macro to the micro</h2>
@@ -313,7 +322,7 @@ onBeforeUnmount(() => {
             and thoughtfully crafted.
           </span>
           <span class="text-sm lg:text-[18px] font-[300] overflow-hidden">
-            <span class="block animated-text">
+            <span class="block animated-text text-[#212121]">
               We take the time to listen to your ideas and understand your values, ensuring that
               every detail reflects who you are. Together, we create a digital space that not only
               captures your identity but also resonates with your audience.
@@ -345,8 +354,8 @@ onBeforeUnmount(() => {
               We are dedicated to turning your ideas into reality. Our goal is to create engaging
               digital experiences that empower your business to achieve its goals.
             </span>
-            <span class="text-sm lg:text-[18px] font-[100] overflow-hidden">
-              <span class="block text-white animated-text-4-1">
+            <span class="text-sm lg:text-[18px] font-[300] overflow-hidden">
+              <span class="block text-[#a4a4a4] animated-text-4-1">
                 We also specialize in custom solutions designed just for you. By working closely
                 with you, we build tailor-made software products that address your specific needs.
               </span>
@@ -364,7 +373,7 @@ onBeforeUnmount(() => {
           class="flex flex-col w-full lg:flex-row items-stretch gap-10 max-w-[2000px] px-6 lg:px-12 xl:px-12 2xl:px-44 mx-auto"
         >
           <div
-            class="service-card-1 flex flex-col w-full bg-[#1F1F21] rounded-2xl p-5 lg:p-8 relative"
+            class="service-card-1 flex flex-col w-full bg-[#161618] border border-[rgba(255,255,255,0.1)] rounded-2xl p-5 lg:p-8 relative"
           >
             <h2 class="mb-6 lg:mb-8 text-3xl lg:text-4xl text-white">
               <span class="text-[#48348B]">WEB</span><br />DEVELOPMENT
@@ -384,7 +393,7 @@ onBeforeUnmount(() => {
             >
           </div>
           <div
-            class="service-card-2 flex flex-col w-full bg-[#1F1F21] rounded-2xl p-5 lg:p-8 relative"
+            class="service-card-2 flex flex-col w-full bg-[#161618] border border-[rgba(255,255,255,0.1)] rounded-2xl p-5 lg:p-8 relative"
           >
             <h2 class="mb-6 lg:mb-8 text-3xl lg:text-4xl text-white">
               <span class="text-[#48348B]">UX/UI</span><br />DESIGN
@@ -405,7 +414,7 @@ onBeforeUnmount(() => {
             </span>
           </div>
           <div
-            class="service-card-3 flex flex-col w-full bg-[#1F1F21] rounded-2xl p-5 lg:p-8 relative"
+            class="service-card-3 flex flex-col w-full bg-[#161618] border border-[rgba(255,255,255,0.1)] rounded-2xl p-5 lg:p-8 relative"
           >
             <h2 class="mb-6 lg:mb-8 text-3xl lg:text-4xl text-white">
               <span class="text-[#48348B]">DIGITAL</span><br />BRANDING
@@ -518,21 +527,85 @@ onBeforeUnmount(() => {
       </div>
     </div>
   </section>
-  <footer class="flex items-center justify-between relative p-40">
-    <p class="max-w-[314px]">
-      We'd love to hear from you. Whether you have a question or a project in mind, we're here to
-      help.
-    </p>
-    <div class="flex flex-col items-end">
-      <h2 class="text-3xl text-[]">Let's work</h2>
-      <a
-        href="mailto:info@teleport-studio.com"
-        class="text-[3em] hover:underline hover:text-[#48348B] transition-colors duration-500"
-      >
-        info@teleport-studio.com
-      </a>
+  <footer class="fixed bottom-0 w-full h-[600px] hidden flex-col items-center justify-between">
+    <div class="flex items-center justify-between flex-wrap grow w-full max-w-[1240px] px-20">
+      <div class="flex flex-col items-start gap-6">
+        <p class="max-w-[314px]">
+          We'd love to hear from you. Whether you have a question or a project in mind, we're here
+          to help.
+        </p>
+        <button
+          @click="router.push('/contact')"
+          class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border border-black bg-transparent font-medium cursor-pointer"
+        >
+          <div
+            class="inline-flex h-12 translate-y-0 items-center justify-center gap-2 px-6 text-black transition duration-500 group-hover:-translate-y-[150%]"
+          >
+            Let's work
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+            >
+              <path
+                d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="absolute inline-flex h-12 w-full translate-y-[100%] items-center justify-center text-white transition duration-500 group-hover:translate-y-0"
+          >
+            <span
+              class="absolute h-full w-full translate-y-full skew-y-12 scale-y-0 bg-black transition duration-500 group-hover:translate-y-0 group-hover:scale-150"
+            ></span>
+            <span class="z-10 flex items-center gap-2">
+              Let's work
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-white"
+              >
+                <path
+                  d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </span>
+          </div>
+        </button>
+      </div>
+      <div class="flex items-start gap-8">
+        <div class="flex flex-col gap-2">
+          <h4 class="text-sm text-[#161618]">socials</h4>
+          <a
+            href="https://www.instagram.com/teleport.agency/"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="font-bold hover:underline"
+          >
+            instagram
+          </a>
+          <a href="#" class="font-bold hover:underline">facebook</a>
+          <a href="#" class="font-bold hover:underline">linkedin</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="text-sm text-[#161618]">phone</h4>
+          <span class="font-bold">+386 070 365 764</span>
+        </div>
+      </div>
     </div>
-    <small class="absolute bottom-2 right-2">&copy; 2025 TELEPORT STUDIO</small>
+    <small class="py-3 text-[#a4a4a4]">&copy; 2025 TELEPORT STUDIO</small>
   </footer>
 </template>
 
@@ -550,6 +623,9 @@ onBeforeUnmount(() => {
 .hero-text {
   will-change: opacity;
 }
+.hero-p {
+  font-family: 'Hedvig Letters Serif';
+}
 .scroll-highlight,
 .scroll-highlight-4-1 {
   font-family: 'Hedvig Letters Serif';
@@ -566,22 +642,10 @@ onBeforeUnmount(() => {
   font-family: 'Hedvig Letters Serif';
 }
 
-/* .section-4::before {
-  content: '';
-  background-color: transparent;
-  background-image: url('../assets/noise.svg');
-  background-repeat: repeat;
-  background-size: 600px;
-  opacity: 0.1;
-  top: 0;
-  left: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-} */
-
 .section-5 {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 600px;
   p {
     font-family: 'Hedvig Letters Serif';
   }
@@ -679,8 +743,35 @@ onBeforeUnmount(() => {
 
 footer {
   p,
-  h2 {
+  h4,
+  button {
     font-family: 'Hedvig Letters Serif';
+  }
+}
+@media screen and (max-width: 760px) {
+  footer > div {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+  }
+}
+@media screen and (max-width: 760px) {
+  footer > div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    & > div {
+      align-items: center;
+    }
+    & > div:last-child {
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 }
 </style>

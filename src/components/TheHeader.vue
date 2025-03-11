@@ -2,15 +2,9 @@
 import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { gsap } from 'gsap'
-import { vOnClickOutside } from '@vueuse/components'
 
 const router = useRouter()
 const header = ref()
-const menu = ref(false)
-
-const toggleMenu = () => {
-  menu.value = !menu.value
-}
 
 onMounted(async () => {
   await router.isReady()
@@ -31,112 +25,74 @@ watch(
     }
   },
 )
-watch(
-  () => menu.value,
-  (newPath) => {
-    if (newPath) {
-      gsap.fromTo('.mobile-menu', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' })
-    } else {
-      gsap.fromTo('.mobile-menu', { opacity: 1 }, { opacity: 0, duration: 0.5, ease: 'power2.out' })
-    }
-  },
-)
 </script>
 
 <template>
   <header
     ref="header"
-    class="fixed z-50 top-4 left-4 right-4 h-16 flex flex-col justify-start lg:justify-center bg-white/30 backdrop-blur-[10px] rounded-[10px] shadow-[0_18px_40px_rgba(0,0,0,0.03),0_0_2px_rgba(0,0,0,0.14)] bg-blur max-w-[2000px] mx-auto translate-y-[-150px] transition-all duration-500 overflow-hidden"
-    :class="{ 'h-[328.5px]': menu }"
-    v-on-click-outside="() => (menu = false)"
+    class="absolute z-50 top-4 lg:top-8 left-4 lg:left-8 right-4 lg:right-8 max-w-[2000px] mx-auto translate-y-[-150px] transition-all duration-500 overflow-hidden"
   >
-    <div class="flex items-center justify-between px-4 pt-4 lg:pt-0 lg:px-6">
+    <div class="flex items-center gap-8">
       <img src="../assets/logo.png" alt="logo" class="h-8 w-8" />
-      <div class="hidden items-center gap-4 lg:flex">
-        <router-link
-          to="/"
-          class="px-4 py-2 hover:bg-[#ededed] rounded-[10px]"
-          activeClass="bg-[#ededed] rounded-[10px]"
-        >
-          <span class="leading-[18px]">Home</span>
-        </router-link>
-        <router-link
-          to="/services"
-          class="px-4 py-2 hover:bg-[#ededed] rounded-[10px]"
-          activeClass="bg-[#ededed] rounded-[10px]"
-        >
-          <span class="leading-[18px]">What we do</span>
-        </router-link>
-        <router-link
-          to="/about"
-          class="px-4 py-2 hover:bg-[#ededed] rounded-[10px]"
-          activeClass="bg-[#ededed] rounded-[10px]"
-        >
-          <span class="leading-[18px]">About</span>
-        </router-link>
-      </div>
-      <div class="hidden lg:inline-flex relative group">
-        <div
-          class="absolute transitiona-all duration-1000 opacity-60 -inset-px bg-gradient-to-r from-[#8A2BE2] via-[#8A2BE2] to-[#8A2BE2] rounded-[10px] blur-md group-hover:opacity-80 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
-        ></div>
+      <div class="h-[1px] bg-black w-full"></div>
+      <div class="flex justify-end w-[156px]">
         <button
-          type="button"
-          class="relative inline-flex items-center justify-center px-4 py-2 text-white transition-all duration-200 bg-[#8A2BE2] rounded-[10px] focus:outline-none"
+          @click="router.push('/contact')"
+          class="contact group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full border border-black bg-transparent font-medium cursor-pointer"
         >
-          <span class="leading-[18px]">Let's work</span>
-        </button>
-      </div>
-      <div
-        id="toggleMenu"
-        @click="toggleMenu()"
-        class="grid lg:hidden place-content-center w-8 h-8"
-        :class="{
-          '[&>div]:h-0 [&>div]:bg-white [&>div]:before:translate-y-0 [&>div]:before:rotate-45 [&>div]:after:translate-y-0 [&>div]:after:-rotate-45':
-            menu,
-        }"
-      >
-        <div
-          class="w-6 h-[2px] bg-black transition-all duration-150 before:content-[''] before:absolute before:w-6 before:h-[2px] before:bg-black before:-translate-y-2 before:transition-all before:duration-150 after:content-[''] after:absolute after:w-6 after:h-[2px] after:bg-black after:translate-y-2 after:transition-all after:duration-150"
-        ></div>
-      </div>
-    </div>
-    <div class="mobile-menu flex flex-col gap-3 px-4 pb-4 py-4 items-center lg:hidden">
-      <router-link
-        to="/"
-        @click="toggleMenu()"
-        class="px-4 py-2 rounded-[10px] w-full text-center"
-        activeClass="bg-black text-center text-white"
-      >
-        <span class="text-xl">Home</span>
-      </router-link>
-      <router-link
-        to="/services"
-        @click="toggleMenu()"
-        class="px-4 py-2 rounded-[10px] w-full text-center"
-        activeClass="bg-black text-center text-white"
-      >
-        <span class="text-xl">What we do</span>
-      </router-link>
-      <router-link
-        to="/about"
-        @click="toggleMenu()"
-        class="px-4 py-2 rounded-[10px] w-full text-center"
-        activeClass="bg-black text-center text-white"
-      >
-        <span class="text-xl">About</span>
-      </router-link>
-      <hr class="border-t-[0.5px] border-[#888] w-full my-3" />
-      <div class="inline-flex relative group w-full">
-        <div
-          class="absolute transitiona-all duration-1000 opacity-60 -inset-px bg-gradient-to-r from-[#8A2BE2] via-[#8A2BE2] to-[#8A2BE2] rounded-[10px] blur-md group-hover:opacity-80 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
-        ></div>
-        <button
-          type="button"
-          class="relative inline-flex items-center justify-center px-4 py-2 w-full text-white transition-all duration-200 bg-[#8A2BE2] rounded-[10px] focus:outline-none"
-        >
-          <span class="text-xl">Let's workk</span>
+          <div
+            class="inline-flex w-full h-12 translate-y-0 items-center justify-center gap-2 px-6 text-black transition duration-500 group-hover:-translate-y-[150%]"
+          >
+            <span class="whitespace-nowrap">Let's work</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+            >
+              <path
+                d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="absolute inline-flex h-12 w-full translate-y-[100%] items-center justify-center text-white transition duration-500 group-hover:translate-y-0"
+          >
+            <span
+              class="absolute h-full w-full translate-y-full skew-y-12 scale-y-0 bg-black transition duration-500 group-hover:translate-y-0 group-hover:scale-150"
+            ></span>
+            <span class="z-10 flex items-center gap-2 text-nowrap">
+              Let's work
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-white"
+              >
+                <path
+                  d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </span>
+          </div>
         </button>
       </div>
     </div>
   </header>
 </template>
+
+<style scoped>
+.contact {
+  font-family: 'Hedvig Letters Serif';
+}
+</style>
