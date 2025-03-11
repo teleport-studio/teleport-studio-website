@@ -669,19 +669,18 @@ onBeforeUnmount(() => {
     fill: #48348b;
     stroke: #48348b;
   }
+  @media screen and (max-width: 640px) {
+    .card {
+      height: 300px;
+      width: 300px;
+    }
+  }
 }
 
 footer {
   p,
   h2 {
     font-family: 'Hedvig Letters Serif';
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .card {
-    height: 300px;
-    width: 300px;
   }
 }
 </style>
