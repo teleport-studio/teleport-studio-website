@@ -44,7 +44,7 @@ watch(
     class="absolute z-50 top-4 lg:top-8 left-4 lg:left-8 right-4 lg:right-8 max-w-[2000px] mx-auto translate-y-[-150px] transition-all duration-500 overflow-hidden"
   >
     <div class="flex items-center gap-8">
-      <img src="../assets/logo.png" alt="logo" class="h-8 w-8" />
+      <img src="/logo.svg" alt="logo" class="h-8 w-8" />
       <div class="h-[1px] bg-black w-full"></div>
       <div class="flex justify-end w-[156px]">
         <button

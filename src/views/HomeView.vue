@@ -601,7 +601,7 @@ onBeforeUnmount(() => {
         </div>
         <div class="flex flex-col gap-2">
           <h4 class="text-sm text-[#161618]">phone</h4>
-          <span class="font-bold">+386 070 365 764</span>
+          <span class="font-bold">+386 70 822 681</span>
         </div>
       </div>
     </div>
