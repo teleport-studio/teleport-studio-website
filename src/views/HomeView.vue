@@ -605,15 +605,11 @@ onBeforeUnmount(() => {
         </div>
         <div class="flex flex-col gap-2">
           <h4 class="text-sm text-[#161618]">phone</h4>
-<<<<<<< Updated upstream
-          <span class="font-bold">+386 70 822 681</span>
-=======
           <a href="tel:+38670822681" class="font-bold">+386 70 822 681</a>
         </div>
         <div class="flex flex-col gap-2">
           <h4 class="text-sm text-[#161618]">email</h4>
           <a href="mailto:info@teleport-studio.com" class="font-bold">info@teleport-studio.com</a>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
